@@ -11,6 +11,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Serializable]
         public class MovementSettings
         {
+            public float PlayerDrag = 0.1f;
             public float ForwardSpeed = 8.0f;   // Speed when walking forward
             public float BackwardSpeed = 4.0f;  // Speed when walking backwards
             public float StrafeSpeed = 4.0f;    // Speed when walking sideways
@@ -160,7 +161,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (m_IsGrounded)
             {
-                m_RigidBody.drag = 5f;
+                m_RigidBody.drag = movementSettings.PlayerDrag;
 
                 if (m_Jump)
                 {

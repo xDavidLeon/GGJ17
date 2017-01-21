@@ -14,22 +14,22 @@ public class BoardingTrigger : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter(Collider c)
-    {
-        //if (c.GetComponent<Buoyancy>() != null) c.GetComponent<Buoyancy>().enabled = false;
-        if (c.GetComponent<Character>() == null) return;
+    //void OnTriggerEnter(Collider c)
+    //{
+    //    //if (c.GetComponent<Buoyancy>() != null) c.GetComponent<Buoyancy>().enabled = false;
+    //    if (c.GetComponent<Character>() == null) return;
 
-        Debug.Log("Character " + c.name + " attached");
-        c.transform.SetParent(transform.parent);
-    }
+    //    Debug.Log("Character " + c.name + " attached");
+    //    c.transform.SetParent(transform.parent);
+    //}
 
-    void OnTriggerExit(Collider c)
-    {
-        //if (c.GetComponent<Buoyancy>() != null) c.GetComponent<Buoyancy>().enabled = true;
-        if (c.GetComponent<Character>() == null) return;
-        Debug.Log("Character " + c.name + " detached");
-        c.transform.SetParent(null);
-    }
+    //void OnTriggerExit(Collider c)
+    //{
+    //    //if (c.GetComponent<Buoyancy>() != null) c.GetComponent<Buoyancy>().enabled = true;
+    //    if (c.GetComponent<Character>() == null) return;
+    //    Debug.Log("Character " + c.name + " detached");
+    //    c.transform.SetParent(null);
+    //}
 
     //void OnTriggerEnter(Collider c)
     //{
