@@ -14,17 +14,17 @@ public class SeaTrigger : MonoBehaviour {
 		
 	}
 
-    //void OnTriggerEnter(Collider c)
-    //{
-    //    if (c.GetComponent<Buoyancy>() == null) return;
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.GetComponent<Character>() == null) return;
 
-    //    c.GetComponent<Buoyancy>().enabled = true;
-    //}
+        c.GetComponent<Character>().swimming = true;
+    }
 
-    //void OnTriggerExit(Collider c)
-    //{
-    //    if (c.GetComponent<Buoyancy>() == null) return;
+    void OnTriggerExit(Collider c)
+    {
+        if (c.GetComponent<Character>() == null) return;
 
-    //    c.GetComponent<Buoyancy>().enabled = false;
-    //}
+        c.GetComponent<Character>().swimming = false;
+    }
 }

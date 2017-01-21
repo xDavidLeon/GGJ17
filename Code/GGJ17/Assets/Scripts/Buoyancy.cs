@@ -57,11 +57,11 @@ public class Buoyancy : MonoBehaviour {
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 0, 1, 0.75F);
-
+        if (buoyancyPoints.Length == 0) return;
         foreach (Vector3 point in buoyancyPoints)
         {
             Vector3 actionPoint = transform.position + transform.TransformDirection(point);
-            Gizmos.DrawCube(actionPoint, new Vector3(1.0f, 1.0f, 1.0f));
+            Gizmos.DrawCube(actionPoint, new Vector3(0.2f, 0.2f,0.2f));
         }
     }
 }
