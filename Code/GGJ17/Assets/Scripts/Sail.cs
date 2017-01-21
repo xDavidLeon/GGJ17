@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,22 +36,19 @@ public class Sail : MonoBehaviour {
 	
     public void Extend()
     {
+        Debug.Log("Extending sail " + gameObject.name);
         extended = true;
     }
 
     public void Retract()
     {
+        Debug.Log("Retracting sail " + gameObject.name);
         extended = false;
     }
 
-    void OnTriggerStay(Collider c)
+    public void Activate()
     {
-        if (c.CompareTag("Player") == false) return;
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            if (extended) Retract();
-            else Extend();
-        }
+        if (extended) Retract();
+        else Extend();
     }
 }

@@ -24,10 +24,11 @@ public class Character : MonoBehaviour
 
     [Header("Ship")]
     public Ship currentShip;
+    public Cannon controlledCannon;
 
     [SerializeField]
     private MouseLook m_MouseLook;
-    private Camera m_Camera;
+    public Camera m_Camera;
 
     void Awake()
     {
@@ -35,7 +36,6 @@ public class Character : MonoBehaviour
 
     void Start()
     {
-        m_Camera = Camera.main;
         m_MouseLook.Init(transform, m_Camera.transform);
     }
 
@@ -55,13 +55,48 @@ public class Character : MonoBehaviour
         }
         else
         {
-            if (Physics.Raycast(m_Camera.transform.position, m_Camera.transform.forward, out hit, grabDistance))
+            if (Physics.Raycast(m_Camera.transform.position, m_Camera.transform.forward, out hit, grabDistance, (1 << LayerMask.NameToLayer("Pickup"))))
             {
                 Debug.DrawLine(m_Camera.transform.position, m_Camera.transform.position + m_Camera.transform.forward * grabDistance, Color.green);
+                Debug.Log(hit.transform.name);
                 if (Input.GetMouseButtonDown(0)) GrabObject(hit.transform.gameObject);
             }
             else
+            {
                 Debug.DrawLine(m_Camera.transform.position, m_Camera.transform.position + m_Camera.transform.forward * grabDistance, Color.red);
+
+                if (Physics.Raycast(m_Camera.transform.position, m_Camera.transform.forward, out hit, grabDistance))
+                {
+                    if ( currentShip != null )
+                    {
+                        if (Input.GetMouseButton(0))
+                        {
+                            if (hit.collider == currentShip.controlWheel.left) currentShip.RotateLeft();
+                            else if (hit.collider == currentShip.controlWheel.right) currentShip.RotateRight();
+                        }
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            if (hit.collider.GetComponent<Sail>()) hit.collider.GetComponent<Sail>().Activate();
+                        }
+                    }
+                }
+            }
+        }
+
+        if (controlledCannon != null)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                controlledCannon.Shoot();
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                controlledCannon.currentAngle += 10.0f * Time.deltaTime;
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                controlledCannon.currentAngle -= 10.0f * Time.deltaTime;
+            }
         }
     }
 

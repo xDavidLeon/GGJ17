@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ship : MonoBehaviour {
-    public GameObject controlWheel;
+    public Wheel controlWheel;
     public List<Sail> sails;
     public List<GameObject> cargo = new List<GameObject>();
     public Transform cargoHolder;
@@ -61,6 +61,7 @@ public class Ship : MonoBehaviour {
         rndPosWithin = cargoHolder.transform.position + new Vector3(Random.Range(-cargoHolder.localScale.x/2.0f, cargoHolder.localScale.x/2.0f), Random.Range(-cargoHolder.localScale.y / 2.0f, cargoHolder.localScale.y / 2.0f), Random.Range(-cargoHolder.localScale.z / 2.0f, cargoHolder.localScale.z / 2.0f));
         pickup.transform.position = rndPosWithin;
         pickup.transform.rotation = Quaternion.identity;
+        pickup.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
     public void AddCargo(GameObject pickup)

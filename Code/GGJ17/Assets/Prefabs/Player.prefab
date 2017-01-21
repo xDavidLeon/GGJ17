@@ -1334,11 +1334,12 @@ MonoBehaviour:
   jumpForce: 80
   swimming: 0
   climbing: 0
-  grabDistance: 2
+  grabDistance: 3
   grabbedObject: {fileID: 0}
   grabLerpTime: 1
   throwForce: 10
   currentShip: {fileID: 0}
+  controlledCannon: {fileID: 0}
   m_MouseLook:
     XSensitivity: 2
     YSensitivity: 2
@@ -1348,6 +1349,7 @@ MonoBehaviour:
     smooth: 0
     smoothTime: 5
     lockCursor: 1
+  m_Camera: {fileID: 0}
 --- !u!114 &114585589016722354
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,6 +7,8 @@ TagManager:
   - Pickup
   - Ship
   - PlayerShip
+  - Destructible
+  - Sail
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Pickup
   - 
   - 
   - 
