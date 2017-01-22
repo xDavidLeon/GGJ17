@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupSpawner : MonoBehaviour {
-    public GameObject cratePrefab;
+    public GameObject[] cratePrefab;
     public GameObject container;
     public int numCrates = 100;
 
@@ -19,7 +19,7 @@ public class PickupSpawner : MonoBehaviour {
     {
         Vector3 rndPosWithin;
         rndPosWithin = transform.position + new Vector3(Random.Range(-transform.localScale.x / 2.0f, transform.localScale.x / 2.0f), Random.Range(-transform.localScale.y / 2.0f, transform.localScale.y / 2.0f), Random.Range(-transform.localScale.z / 2.0f, transform.localScale.z / 2.0f));
-        GameObject pickup = GameObject.Instantiate(cratePrefab, rndPosWithin, Quaternion.identity);
+        GameObject pickup = GameObject.Instantiate( cratePrefab[Random.Range(0, cratePrefab.Length)], rndPosWithin, Quaternion.identity);
         pickup.transform.parent = container.transform;
         return pickup;
     }

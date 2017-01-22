@@ -10,7 +10,7 @@ public class Cannon : MonoBehaviour {
     public bool autoShoot = false;
     public bool aimPlayer = false;
     private float timer = 0.0f;
-
+    public float AIrange = 100.0f;
     public float currentAngle = 0.0f;
     public float minAngle = -20.0f;
     public float maxAngle = 0.0f;
@@ -28,26 +28,25 @@ public class Cannon : MonoBehaviour {
         if (timer > 0) timer -= Time.deltaTime;
         timer = Mathf.Clamp(timer, 0, 10.0f);
 
-        playerInRange = Vector3.Distance(transform.position, GameManager.Instance.player.transform.position) < 75.0f;
-        if (playerControlling == false && aimPlayer && playerInRange)
+        foreach(Player player in GameManager.Instance.players)
         {
-            Quaternion lookat = Quaternion.LookRotation((GameManager.Instance.player.transform.position + new Vector3(Random.Range(-5.0f, 5.0f), Random.Range(-2.0f, 2.0f), Random.Range(-5.0f, 5.0f)) - transform.position).normalized, Vector3.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookat, Time.time * 0.1f);
+            playerInRange = Vector3.Distance(transform.position, player.transform.position) < AIrange;
+            if (playerControlling == false && aimPlayer && playerInRange)
+            {
+                Quaternion lookat = Quaternion.LookRotation((player.transform.position + new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f)) - transform.position).normalized, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, lookat, Time.time * 0.1f);
+                break;
+            }
         }
-        else if (playerControlling)
-        {
-            //currentAngle = Mathf.Clamp(currentAngle, minAngle, maxAngle);
-            //Vector3 euler = transform.localEulerAngles;
-            //euler.x = currentAngle;
-            //transform.localRotation = Quaternion.Euler(euler);
-        }
+
     }
 
     public void Shoot()
     {
         if (timer > 0) return;
         if (playerControlling == false && !playerInRange) return;
-        timer = 3.0f;
+        timer = cooldown;
+        GetComponent<AudioSource>().Play();
 
         GameObject g = GameObject.Instantiate(cannonballPrefab, launchVector.position, launchVector.rotation) as GameObject;
         g.GetComponent<Rigidbody>().AddForce(launchVector.forward * explosiveForce, ForceMode.Impulse);
@@ -58,8 +57,8 @@ public class Cannon : MonoBehaviour {
         //if (playerControlling) return;
         if (c.CompareTag("Player"))
         {
-            transform.LookAt(GameManager.Instance.player.m_Camera.transform.position + GameManager.Instance.player.m_Camera.transform.forward * 1000.0f);
-            c.GetComponent<Character>().controlledCannon = this;
+            transform.LookAt(c.GetComponent<Player>().m_Camera.transform.position + c.GetComponent<Player>().m_Camera.transform.forward * 1000.0f);
+            c.GetComponent<Player>().controlledCannon = this;
             playerControlling = true;
         }
     }
@@ -68,7 +67,7 @@ public class Cannon : MonoBehaviour {
     {
         if (c.CompareTag("Player"))
         {
-            c.GetComponent<Character>().controlledCannon = null;
+            c.GetComponent<Player>().controlledCannon = null;
             playerControlling = false;
         }
     }

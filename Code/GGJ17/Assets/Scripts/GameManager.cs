@@ -16,7 +16,7 @@ public class GameManager : MonoSingleton<GameManager> {
 
     [Header("Gameplay")]
     public Transform SpawnPoint;
-    public Character player;
+    public Player[] players;
     public GameObject aerialCamera;
 
     public enum CAMERA_MODE
@@ -37,15 +37,17 @@ public class GameManager : MonoSingleton<GameManager> {
         if (Input.GetKeyDown(KeyCode.C)) SetCameraMode(CAMERA_MODE.AERIAL);
         if (Input.GetKeyDown(KeyCode.V)) SetCameraMode(CAMERA_MODE.FPS);
 
-        if (player.GetComponent<Character>().currentShip != null)
-            textCargoCount.text = player.GetComponent<Character>().currentShip.CountCargo().ToString();
+        foreach (Player player in players)
+            if (player.currentShip != null)
+                textCargoCount.text = player.currentShip.CountCargo().ToString();
 
         if ((gameWin || gameLose) && Input.GetKeyDown(KeyCode.Space)) RestartGame();
     }
 
     public void ResetPlayer()
     {
-        player.transform.position = SpawnPoint.position;
+        foreach (Player player in players)
+            player.transform.position = SpawnPoint.position;
     }
 
     public void SetCameraMode(CAMERA_MODE c)
@@ -59,7 +61,7 @@ public class GameManager : MonoSingleton<GameManager> {
     {
         gameWin = true;
         canvasWin.alpha = 1.0f;
-        txtScoreWin.text = player.GetComponent<Character>().currentShip.CountCargo().ToString();
+        txtScoreWin.text = players[0].currentShip.CountCargo().ToString();
     }
 
     public void RestartGame()

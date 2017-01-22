@@ -28,9 +28,10 @@ public class CannonBall : MonoBehaviour {
                 continue;
             }
             if (col.GetComponent<Rigidbody>() == null) continue;
-            col.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            col.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius, 3.0f);
         }
 
+        GetComponent<AudioSource>().Play();
         GameObject.Destroy(this.gameObject);
     }
 

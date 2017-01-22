@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 65363194366247512}
   - component: {fileID: 114076453545712552}
   - component: {fileID: 65952873657507300}
+  - component: {fileID: 82788503148225844}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Destructible
@@ -98,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1137673683884268}
   m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -3.087, y: 1.737, z: 4.372711}
+  m_LocalPosition: {x: 17.05728, y: -7.5747833, z: -301.87726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4136471412484280}
@@ -127,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1531282558089852}
   m_LocalRotation: {x: -0.08663189, y: -0.004548504, z: 0.005540473, w: 0.9962147}
-  m_LocalPosition: {x: -0.53772324, y: 1.4956083, z: 1.3066224}
+  m_LocalPosition: {x: -0.57, y: 2.01, z: 4.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4478784634826086}
@@ -235,6 +236,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.16, y: 2.48, z: 2.74}
   m_Center: {x: -0.85, y: 0.64, z: -0.2}
+--- !u!82 &82788503148225844
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1137673683884268}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 69b2018342cbfd64097e3258cb70b285, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114076453545712552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,10 +330,11 @@ MonoBehaviour:
   cannonballPrefab: {fileID: 1302833971420318, guid: 2a2d88f38ee91f244a9620ccbf2fb089,
     type: 2}
   launchVector: {fileID: 4905238798680524}
-  explosiveForce: 1000
+  explosiveForce: 1500
   cooldown: 1
   autoShoot: 1
   aimPlayer: 1
+  AIrange: 200
   currentAngle: 0
   minAngle: -20
   maxAngle: 20

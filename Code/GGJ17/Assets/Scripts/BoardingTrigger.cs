@@ -13,9 +13,9 @@ public class BoardingTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider c)
     {
         //if (c.GetComponent<Buoyancy>() != null) c.GetComponent<Buoyancy>().enabled = false;
-        if (c.GetComponent<Character>() != null)
+        if (c.GetComponent<Player>() != null)
         {
-            c.GetComponent<Character>().currentShip = ship;
+            c.GetComponent<Player>().currentShip = ship;
         }
 
         if (c.CompareTag("Pickup"))
